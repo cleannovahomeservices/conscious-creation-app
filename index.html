@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Your conscious creation companion. Without ego. Without forcing. Without lack.">
+  <meta name="theme-color" content="#1f1647">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Conscious Creation">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>Conscious Creation — The Practice</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="period-morning">
+
+<!-- ============== SPLASH SCREEN ============== -->
+<section id="splash" class="screen active">
+  <div class="splash-content">
+    <div class="splash-mark">❖</div>
+    <div class="splash-name">Conscious<br>Creation</div>
+    <div class="splash-tagline">Your daily companion</div>
+  </div>
+</section>
+
+<!-- ============== ONBOARDING ============== -->
+<section id="onboarding-welcome" class="screen">
+  <div class="phone-content centered">
+    <div class="onboarding-mark">❖</div>
+    <div class="app-eyebrow">Welcome</div>
+    <h1 class="app-title">A companion<br>for the practice<em>not a coach</em></h1>
+    <p class="app-subtitle">This app accompanies the daily rhythm of conscious creation. Three returns — morning, day, evening. Held lightly. Always optional.</p>
+    <div class="onboarding-actions">
+      <button class="app-btn primary" data-action="onboarding-next" data-target="onboarding-name">Begin</button>
+    </div>
+  </div>
+</section>
+
+<section id="onboarding-name" class="screen">
+  <div class="phone-content">
+    <div class="screen-header">
+      <button class="header-btn" data-action="back-to" data-target="onboarding-welcome">←</button>
+      <div class="header-mark">❖</div>
+      <span></span>
+    </div>
+    <div class="app-eyebrow">A First Question</div>
+    <h2 class="app-title">By what name<br>shall we know you?</h2>
+    <p class="app-subtitle">First name only. The teaching is impersonal — but the practitioner is not.</p>
+    <input id="input-name" class="app-input" type="text" placeholder="Your first name" autocomplete="given-name">
+    <div class="screen-actions-bottom">
+      <button class="app-btn primary" data-action="save-name">Continue</button>
+    </div>
+  </div>
+</section>
+
+<section id="onboarding-iam" class="screen">
+  <div class="phone-content">
+    <div class="screen-header">
+      <button class="header-btn" data-action="back-to" data-target="onboarding-name">←</button>
+      <div class="header-mark">❖</div>
+      <span></span>
+    </div>
+    <div class="app-eyebrow">First I AM</div>
+    <h2 class="app-title">What identity<br>are you stepping into?</h2>
+    <p class="app-subtitle">Not a goal. Not a wish. The state you are recognizing. <em>You can change this any morning.</em></p>
+    <input id="input-iam" class="app-input" type="text" placeholder="I AM..." value="I AM">
+    <div class="app-eyebrow inline">Or choose one</div>
+    <div class="iam-suggestions"></div>
+    <div class="screen-actions-bottom">
+      <button class="app-btn primary" data-action="save-iam">Set as my I AM</button>
+    </div>
+  </div>
+</section>
+
+<section id="onboarding-rhythm" class="screen">
+  <div class="phone-content">
+    <div class="screen-header">
+      <button class="header-btn" data-action="back-to" data-target="onboarding-iam">←</button>
+      <div class="header-mark">❖</div>
+      <span></span>
+    </div>
+    <div class="app-eyebrow">Your Rhythm</div>
+    <h2 class="app-title">When do you wake?<em>And when do you sleep?</em></h2>
+    <p class="app-subtitle">Practice times follow your rhythm, not the clock. Use the natural language that fits your life.</p>
+
+    <div class="rhythm-row">
+      <div class="rhythm-label">Morning</div>
+      <select id="select-morning" class="app-select">
+        <option value="when-you-wake">When you wake</option>
+        <option value="early-morning">Early morning</option>
+        <option value="after-coffee">After coffee</option>
+      </select>
+    </div>
+    <div class="rhythm-row">
+      <div class="rhythm-label">Midday</div>
+      <select id="select-midday" class="app-select">
+        <option value="midday">Midday</option>
+        <option value="around-1pm">Around 1pm</option>
+        <option value="lunch">At lunch</option>
+        <option value="afternoon-pause">An afternoon pause</option>
+      </select>
+    </div>
+    <div class="rhythm-row">
+      <div class="rhythm-label">Evening</div>
+      <select id="select-evening" class="app-select">
+        <option value="before-bed">Before bed</option>
+        <option value="after-dinner">After dinner</option>
+        <option value="when-the-day-closes">When the day closes</option>
+      </select>
+    </div>
+
+    <div class="screen-actions-bottom">
+      <button class="app-btn primary" data-action="save-rhythm">Begin the practice</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TODAY (HOME) ============== -->
+<section id="today" class="screen with-nav">
+  <div class="phone-content">
+    <div class="app-header">
+      <div class="header-mark">❖</div>
+      <button class="header-btn menu-icon" data-action="navigate" data-target="settings">⚙</button>
+    </div>
+
+    <div class="today-greeting" id="today-greeting"></div>
+    <h2 class="app-title" id="today-title"></h2>
+    <p class="app-subtitle" id="today-subtitle"></p>
+
+    <div class="iam-display" id="today-iam"></div>
+
+    <div id="today-practices"></div>
+
+  </div>
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-target="today">
+      <div class="nav-icon">❖</div><div class="nav-label">Today</div>
+    </button>
+    <button class="nav-item" data-target="library">
+      <div class="nav-icon">▤</div><div class="nav-label">Library</div>
+    </button>
+    <button class="nav-item" data-target="letters">
+      <div class="nav-icon">✉</div><div class="nav-label">Letters</div>
+    </button>
+    <button class="nav-item" data-target="path">
+      <div class="nav-icon">○</div><div class="nav-label">Path</div>
+    </button>
+  </nav>
+</section>
+
+<!-- ============== MORNING ANCHOR ============== -->
+<section id="morning-anchor" class="screen">
+  <div class="phone-content">
+    <div class="screen-header">
+      <button class="header-btn" data-action="navigate" data-target="today">×</button>
+      <div class="header-mark">❖</div>
+      <div></div>
+    </div>
+
+    <div id="morning-step-1" class="practice-step active">
+      <div class="practice-eyebrow">The Morning Anchor · Step 1 of 3</div>
+      <h2 class="practice-title">Three breaths</h2>
+      <p class="practice-instruction">Settle into stillness. Three slow breaths. With each in-breath: <em>I</em>. With each out-breath: <em>AM</em>.</p>
+      <div class="breath-circle" id="breath-circle-morning">
+        <div class="breath-text">Begin</div>
+      </div>
+      <div class="screen-actions-bottom">
+        <button class="app-btn primary" data-action="next-step" data-current="morning-step-1" data-next="morning-step-2">Continue</button>
+      </div>
+    </div>
+
+    <div id="morning-step-2" class="practice-step">
+      <div class="practice-eyebrow">The Morning Anchor · Step 2 of 3</div>
+      <h2 class="practice-title">Today's I AM</h2>
+      <p class="practice-instruction">What identity are you stepping into today?</p>
+      <input id="input-today-iam" class="app-input" type="text">
+      <div class="app-eyebrow inline">Or choose one</div>
+      <div class="iam-suggestions" id="morning-iam-suggestions"></div>
+      <div class="screen-actions-bottom">
+        <button class="app-btn primary" data-action="save-today-iam">Carry this through the day</button>
+      </div>
+    </div>
+
+    <div id="morning-step-3" class="practice-step">
+      <div class="practice-eyebrow">The Morning Anchor · Step 3 of 3</div>
+      <h2 class="practice-title">Today's contemplation</h2>
+      <p class="practice-instruction">One teaching to carry beneath every action of the day.</p>
+      <div class="contemplation-card" id="today-contemplation-card"></div>
+      <div class="screen-actions-bottom">
+        <button class="app-btn outline" data-action="reroll-contemplation">Choose another</button>
+        <button class="app-btn primary" data-action="complete-morning">Begin the day</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== MIDDAY PAUSE ============== -->
+<section id="midday-pause" class="screen">
+  <div class="phone-content centered">
+    <div class="screen-header floating">
+      <button class="header-btn" data-action="navigate" data-target="today">×</button>
+      <div class="header-mark">❖</div>
+      <div></div>
+    </div>
+    <div class="practice-eyebrow">A Midday Pause</div>
+    <div class="prompt-mark">❖</div>
+    <h2 class="prompt-text" id="midday-prompt-text">Where today did you forget the I AM you set this morning?</h2>
+    <div class="breath-circle small" id="breath-circle-midday">
+      <div class="breath-text">Three breaths</div>
+    </div>
+    <div class="screen-actions-bottom">
+      <button class="app-btn primary" data-action="complete-midday">I have returned</button>
+      <button class="app-btn outline" data-action="navigate" data-target="today">Later</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============== EVENING RELEASE ============== -->
+<section id="evening-release" class="screen">
+  <div class="phone-content">
+    <div class="screen-header">
+      <button class="header-btn" data-action="navigate" data-target="today">×</button>
+      <div class="header-mark">❖</div>
+      <div></div>
+    </div>
+
+    <div id="evening-step-1" class="practice-step active">
+      <div class="practice-eyebrow">The Evening Release · Step 1 of 3</div>
+      <h2 class="practice-title">Bless what was lived</h2>
+      <p class="practice-instruction">The day, exactly as it unfolded, is held in light. Bless it.</p>
+      <div class="decree-block">
+        Today, I lived.<br>
+        The Self lived through me.<br>
+        I bless what was, in all its forms.
+      </div>
+      <div class="screen-actions-bottom">
+        <button class="app-btn primary" data-action="next-step" data-current="evening-step-1" data-next="evening-step-2">Continue</button>
+      </div>
+    </div>
+
+    <div id="evening-step-2" class="practice-step">
+      <div class="practice-eyebrow">The Evening Release · Step 2 of 3</div>
+      <h2 class="practice-title">Release the form</h2>
+      <p class="practice-instruction">Whatever you held with grasping today, hand to the Self now. Open the hands.</p>
+      <div class="decree-block">
+        This, or something greater.<br>
+        In service of the highest Good.<br>
+        Released into the keeping of the Self.
+      </div>
+      <div class="screen-actions-bottom">
+        <button class="app-btn primary" data-action="next-step" data-current="evening-step-2" data-next="evening-step-3">Continue</button>
+      </div>
+    </div>
+
+    <div id="evening-step-3" class="practice-step">
+      <div class="practice-eyebrow">The Evening Release · Step 3 of 3</div>
+      <h2 class="practice-title">Sleep into the I AM</h2>
+      <p class="practice-instruction">Three slow breaths. With each: <em>I AM</em>. Sleep is not absence. It is the I AM resting in itself.</p>
+      <div class="breath-circle" id="breath-circle-evening">
+        <div class="breath-text">Three breaths</div>
+      </div>
+      <div class="screen-actions-bottom">
+        <button class="app-btn primary" data-action="complete-evening">Goodnight</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== LIBRARY ============== -->
+<section id="library" class="screen with-nav">
+  <div class="phone-content">
+    <div class="app-header">
+      <div class="header-mark">❖</div>
+      <span></span>
+    </div>
+    <div class="app-eyebrow">Library</div>
+    <h2 class="app-title">The Teachings</h2>
+    <p class="app-subtitle">The full architecture, available always.</p>
+
+    <div id="library-content"></div>
+
+  </div>
+  <nav class="bottom-nav">
+    <button class="nav-item" data-target="today"><div class="nav-icon">❖</div><div class="nav-label">Today</div></button>
+    <button class="nav-item active" data-target="library"><div class="nav-icon">▤</div><div class="nav-label">Library</div></button>
+    <button class="nav-item" data-target="letters"><div class="nav-icon">✉</div><div class="nav-label">Letters</div></button>
+    <button class="nav-item" data-target="path"><div class="nav-icon">○</div><div class="nav-label">Path</div></button>
+  </nav>
+</section>
+
+<!-- ============== TEACHING DETAIL ============== -->
+<section id="teaching-detail" class="screen">
+  <div class="phone-content">
+    <div class="screen-header">
+      <button class="header-btn" data-action="navigate" data-target="library">←</button>
+      <div class="header-mark">❖</div>
+      <div></div>
+    </div>
+    <div id="teaching-detail-content"></div>
+  </div>
+</section>
+
+<!-- ============== LETTERS ============== -->
+<section id="letters" class="screen with-nav">
+  <div class="phone-content">
+    <div class="app-header">
+      <div class="header-mark">❖</div>
+      <span></span>
+    </div>
+    <div class="app-eyebrow">Letters</div>
+    <h2 class="app-title">From Constantin</h2>
+    <p class="app-subtitle">Letters arrive when something asks to be said. Never on a content schedule.</p>
+
+    <div id="letters-content"></div>
+
+  </div>
+  <nav class="bottom-nav">
+    <button class="nav-item" data-target="today"><div class="nav-icon">❖</div><div class="nav-label">Today</div></button>
+    <button class="nav-item" data-target="library"><div class="nav-icon">▤</div><div class="nav-label">Library</div></button>
+    <button class="nav-item active" data-target="letters"><div class="nav-icon">✉</div><div class="nav-label">Letters</div></button>
+    <button class="nav-item" data-target="path"><div class="nav-icon">○</div><div class="nav-label">Path</div></button>
+  </nav>
+</section>
+
+<!-- ============== LETTER DETAIL ============== -->
+<section id="letter-detail" class="screen">
+  <div class="phone-content">
+    <div class="screen-header">
+      <button class="header-btn" data-action="navigate" data-target="letters">←</button>
+      <div class="header-mark">❖</div>
+      <div></div>
+    </div>
+    <div id="letter-detail-content"></div>
+  </div>
+</section>
+
+<!-- ============== PATH (RECOGNITIONS) ============== -->
+<section id="path" class="screen with-nav">
+  <div class="phone-content">
+    <div class="app-header">
+      <div class="header-mark">❖</div>
+      <button class="header-btn menu-icon" data-action="navigate" data-target="settings">⚙</button>
+    </div>
+    <div class="app-eyebrow">The Path</div>
+    <h2 class="app-title">Your Recognitions</h2>
+
+    <div class="recognitions-summary">
+      <div class="rec-number" id="days-walked-number">0</div>
+      <div class="rec-label">Days Walked</div>
+    </div>
+
+    <div class="app-eyebrow inline">This Week</div>
+    <div class="calendar-grid" id="week-calendar"></div>
+
+    <div class="app-eyebrow inline">The Stages</div>
+    <div class="stage-list" id="stages-list"></div>
+
+    <div class="path-blessing">You are walking the path.</div>
+
+  </div>
+  <nav class="bottom-nav">
+    <button class="nav-item" data-target="today"><div class="nav-icon">❖</div><div class="nav-label">Today</div></button>
+    <button class="nav-item" data-target="library"><div class="nav-icon">▤</div><div class="nav-label">Library</div></button>
+    <button class="nav-item" data-target="letters"><div class="nav-icon">✉</div><div class="nav-label">Letters</div></button>
+    <button class="nav-item active" data-target="path"><div class="nav-icon">○</div><div class="nav-label">Path</div></button>
+  </nav>
+</section>
+
+<!-- ============== SETTINGS ============== -->
+<section id="settings" class="screen">
+  <div class="phone-content">
+    <div class="screen-header">
+      <button class="header-btn" data-action="back-from-settings">←</button>
+      <div class="header-mark">❖</div>
+      <div></div>
+    </div>
+    <div class="app-eyebrow">Settings</div>
+    <h2 class="app-title">Your Practice</h2>
+
+    <div class="settings-section">
+      <div class="settings-label">Your Name</div>
+      <input id="settings-name" class="app-input small" type="text">
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-label">Your I AM</div>
+      <input id="settings-iam" class="app-input small" type="text">
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-label">Rhythm</div>
+      <div class="rhythm-row">
+        <div class="rhythm-label">Morning</div>
+        <select id="settings-morning" class="app-select">
+          <option value="when-you-wake">When you wake</option>
+          <option value="early-morning">Early morning</option>
+          <option value="after-coffee">After coffee</option>
+        </select>
+      </div>
+      <div class="rhythm-row">
+        <div class="rhythm-label">Midday</div>
+        <select id="settings-midday" class="app-select">
+          <option value="midday">Midday</option>
+          <option value="around-1pm">Around 1pm</option>
+          <option value="lunch">At lunch</option>
+          <option value="afternoon-pause">An afternoon pause</option>
+        </select>
+      </div>
+      <div class="rhythm-row">
+        <div class="rhythm-label">Evening</div>
+        <select id="settings-evening" class="app-select">
+          <option value="before-bed">Before bed</option>
+          <option value="after-dinner">After dinner</option>
+          <option value="when-the-day-closes">When the day closes</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <button class="app-btn outline" data-action="save-settings">Save Changes</button>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-label">About</div>
+      <p class="settings-about">
+        <em>Conscious Creation</em><br>
+        A teaching by Constantin Cranz<br>
+        <span style="font-size: 12px; color: var(--gold);">Beta · v0.1</span>
+      </p>
+      <p class="settings-about" style="margin-top: 12px; font-size: 13px;">
+        <a href="mailto:constantincranz@gmail.com">constantincranz@gmail.com</a><br>
+        <a href="https://www.consciouscreation.art">www.consciouscreation.art</a>
+      </p>
+    </div>
+
+    <div class="settings-section danger">
+      <button class="app-btn outline danger" data-action="reset-app">Reset all data</button>
+      <p class="settings-help">For testing. Returns the app to first launch.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== INSTALL HINT (iOS) ============== -->
+<div id="install-hint" class="install-hint hidden">
+  <div class="hint-content">
+    <div class="hint-mark">❖</div>
+    <p>To install: tap <strong>Share</strong> below, then <strong>Add to Home Screen</strong>.</p>
+    <button class="app-btn outline small" data-action="dismiss-hint">Got it</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
